@@ -146,6 +146,7 @@ service-account-key.json
 *.cred
 secrets/
 secret*
+!.github/*
 
 # ======================
 # Dependency directories

@@ -123,4 +123,45 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-testi.py
+testi.py# ======================
+# Secrets & Credentials
+# ======================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+*.jks
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.pfx
+*.p12
+credentials.json
+credentials/*.json
+service-account.json
+service-account-key.json
+*.cred
+secrets/
+secret*
+
+# ======================
+# Dependency directories
+# ======================
+node_modules/
+venv/
+.venv/
+vendor/
+__pycache__/
+*.pyc
+
+# ======================
+# Build outputs
+# ======================
+dist/
+build/
+*.o
+*.class
+*.jar

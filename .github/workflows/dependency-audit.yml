@@ -1,0 +1,35 @@
+name: Dependency Audit
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # every Monday
+  push:
+    branches: [main, master, develop]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'requirements*.txt'
+
+jobs:
+  npm-audit:
+    if: hashFiles('package-lock.json') != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm audit --audit-level=high || echo "Vulnerabilities found (non-blocking)"
+
+  pip-audit:
+    if: hashFiles('requirements*.txt') != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pip-audit
+      - run: pip-audit -r requirements*.txt || echo "Vulnerabilities found (non-blocking)"
